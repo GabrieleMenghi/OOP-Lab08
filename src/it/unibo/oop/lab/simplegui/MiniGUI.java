@@ -10,9 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicSplitPaneUI.BasicHorizontalLayoutManager;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -33,9 +36,14 @@ public class MiniGUI {
      */
     public MiniGUI() {
         final JPanel canvas = new JPanel();
+        final JPanel myPanel = new JPanel();
         canvas.setLayout(new BorderLayout());
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.LINE_AXIS));
         final JButton write = new JButton("Print a random number on standard output");
+        final JTextField result = new JTextField("Result");
+        canvas.add(myPanel, BorderLayout.CENTER);
         canvas.add(write, BorderLayout.CENTER);
+        canvas.add(result, BorderLayout.NORTH);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -44,7 +52,9 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(rng.nextInt());
+                final int num = rng.nextInt();
+                System.out.println(num);
+                result.setText(String.valueOf(num));
             }
         });
     }
@@ -62,6 +72,10 @@ public class MiniGUI {
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
+        /*
+         * Resize the window to the minimum size
+         */
+        frame.pack();
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
