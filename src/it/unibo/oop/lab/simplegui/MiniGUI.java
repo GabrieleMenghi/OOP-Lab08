@@ -42,7 +42,7 @@ public class MiniGUI {
         final JButton write = new JButton("Print a random number on standard output");
         final JTextField result = new JTextField("Result");
         canvas.add(myPanel, BorderLayout.CENTER);
-        canvas.add(write, BorderLayout.CENTER);
+        myPanel.add(write);
         canvas.add(result, BorderLayout.NORTH);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
